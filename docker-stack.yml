@@ -22,7 +22,7 @@ services:
       - backend
 
   vote:
-    image: dockersamples/examplevotingapp_vote
+    image: kabbajm/vote
     ports:
       - 8080:80
     networks:
@@ -31,19 +31,26 @@ services:
       replicas: 2
 
   result:
-    image: dockersamples/examplevotingapp_result
+    image: kabbajm/result
     ports:
       - 8081:80
     networks:
       - backend
 
   worker:
-    image: dockersamples/examplevotingapp_worker
+    image: kabbajm/worker
     networks:
       - frontend
       - backend
     deploy:
       replicas: 2
+
+  visualizer:
+    build: kabbajm/visualizer
+    volumes:
+    - "/var/run/docker.sock:/var/run/docker.sock"
+    ports:
+    - "8080:8080"
 
 networks:
   frontend:
