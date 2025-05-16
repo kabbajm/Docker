@@ -46,7 +46,7 @@ services:
       replicas: 2
 
   visualizer:
-    build: kabbajm/visualizer
+    image: kabbajm/visualizer
     volumes:
     - "/var/run/docker.sock:/var/run/docker.sock"
     ports:
